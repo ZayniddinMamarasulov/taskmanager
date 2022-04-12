@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:taskmanager/presintation/screens/main_screen.dart';
-import 'package:taskmanager/second_page.dart';
+
+import 'presentation/screens/main_screen.dart';
 
 void main() {
   runApp(const MyApp());

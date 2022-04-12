@@ -8,60 +8,27 @@ class SecondPage extends StatefulWidget {
 }
 
 class _SecondPageState extends State<SecondPage> {
-  int _selectedIndex = 1;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        elevation: 0.0,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-              color: Color(0xFFD8DEF3),
-              size: 29,
-            ),
-            label: ' ',
-            backgroundColor: Color(0xFFF2F5FF),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today_outlined),
-            label: ' ',
-            backgroundColor: Color(0xFFF2F5FF),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications, color: Color(0xFFD8DEF3), size: 29),
-            label: ' ',
-            backgroundColor: Color(0xFFF2F5FF),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search, color: Color(0xFFD8DEF3), size: 29),
-            label: ' ',
-            backgroundColor: Color(0xFFF2F5FF),
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Color(0xFF3A49F9),
-      ),
       backgroundColor: Color(0xFFF2F5FF),
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
             shape: ContinuousRectangleBorder(
-          borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(50), bottomRight: Radius.circular(50))),
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(50),
+                    bottomRight: Radius.circular(50))),
             backgroundColor: Colors.white,
             expandedHeight: MediaQuery.of(context).size.height * 0.3,
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
-
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-    bottomLeft: Radius.circular(50), bottomRight: Radius.circular(50),
-                  )
-                ),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(50),
+                      bottomRight: Radius.circular(50),
+                    )),
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
@@ -82,22 +49,30 @@ class _SecondPageState extends State<SecondPage> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(
+                        height: 20,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
                             children: [
-                              Text("Oct, ",style: TextStyle(fontSize: 24,fontWeight: FontWeight.w600),),
-                              Text("2020",style: TextStyle(fontSize: 24,fontWeight: FontWeight.w600),),
+                              Text(
+                                "Oct, ",
+                                style: TextStyle(
+                                    fontSize: 24, fontWeight: FontWeight.w600),
+                              ),
+                              Text(
+                                "2020",
+                                style: TextStyle(
+                                    fontSize: 24, fontWeight: FontWeight.w600),
+                              ),
                             ],
                           ),
-
                           Container(
                             height: 40,
                             width: 118,
                             decoration: BoxDecoration(
-
                               gradient: LinearGradient(
                                 begin: Alignment.topRight,
                                 end: Alignment.bottomRight,
@@ -110,14 +85,17 @@ class _SecondPageState extends State<SecondPage> {
                               color: Colors.deepPurple.shade300,
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            child: Center(child: Text("+ Add Task",style: TextStyle(color: Colors.white),)),
+                            child: Center(
+                                child: Text(
+                              "+ Add Task",
+                              style: TextStyle(color: Colors.white),
+                            )),
                           ),
                         ],
                       ),
                     ],
                   ),
                 ),
-
               ),
             ),
           ),
@@ -155,7 +133,10 @@ class _SecondPageState extends State<SecondPage> {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(18)),
                         child: ListTile(
-                          title: Text('Design Changes ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          title: Text(
+                            'Design Changes ',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           subtitle: Text('2 Days ago'),
                           trailing: IconButton(
                             onPressed: () {},
@@ -197,7 +178,10 @@ class _SecondPageState extends State<SecondPage> {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(18)),
                         child: ListTile(
-                          title: Text('Design Changes ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          title: Text(
+                            'Design Changes ',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           subtitle: Text('2 Days ago'),
                           trailing: IconButton(
                             onPressed: () {},
@@ -234,12 +218,15 @@ class _SecondPageState extends State<SecondPage> {
                       ),
                       Container(
                         padding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 10 ),
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(18)),
                         child: ListTile(
-                          title: Text('Design Changes ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          title: Text(
+                            'Design Changes ',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           subtitle: Text('2 Days ago'),
                           trailing: IconButton(
                             onPressed: () {},
@@ -276,12 +263,15 @@ class _SecondPageState extends State<SecondPage> {
                       ),
                       Container(
                         padding:
-                        EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(18)),
                         child: ListTile(
-                          title: Text('Design Changes ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          title: Text(
+                            'Design Changes ',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           subtitle: Text('2 Days ago'),
                           trailing: IconButton(
                             onPressed: () {},

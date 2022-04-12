@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:taskmanager/presintation/screens/my_home_page.dart';
-import 'package:taskmanager/second_page.dart';
+import '../../screens/second_page.dart';
+import 'my_home_page.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -11,21 +11,13 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-
   int selectedIndex = 0;
-  List<Widget> screen = [MyHomePageScreen(),SecondPage()];
-  // @override
-  // void initState() {
-  //   TaskService().createBox();
-  //   TaskService().addTask(Task(
-  //       name: "Front end development",
-  //       date: DateTime.now(),
-  //       startTime: DateTime.now(),
-  //       endTime: DateTime.now(),
-  //       description: "sdf sdfhsdjkfkjsdkjf",
-  //       category: "Design"));
-  //   super.initState();
-  // }
+  List<Widget> screen = [
+    MyHomePageScreen(),
+    SecondPage(),
+    Container(),
+    Container()
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +82,6 @@ class _MainScreenState extends State<MainScreen> {
         ],
         currentIndex: selectedIndex,
         onTap: (int i) {
-
           setState(() {
             selectedIndex = i;
           });
