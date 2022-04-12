@@ -29,6 +29,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_svg: ^1.0.3
+  intl:
+  smooth_page_indicator: ^1.0.0+2
+  persistent_bottom_nav_bar:
 
 
   # The following adds the Cupertino Icons font to your application.
