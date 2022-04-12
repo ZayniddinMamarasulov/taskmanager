@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import '../../screens/second_page.dart';
+import 'second_page.dart';
 import 'my_home_page.dart';
 
 class MainScreen extends StatefulWidget {
