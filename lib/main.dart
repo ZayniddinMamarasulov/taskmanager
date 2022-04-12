@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:taskmanager/second_page.dart';
+import 'package:taskmanager/screens/second_page.dart';
+import 'package:taskmanager/screens/thirdpage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,9 +13,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SecondPage(),
+      home: ThirdPage(),
     );
   }
 
-  // group2
+// group2
 }
