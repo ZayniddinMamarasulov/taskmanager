@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:taskmanager/presentation/screens/third_page.dart';
 
+import '../widgets/month_day.dart';
+
 class SecondPage extends StatefulWidget {
   const SecondPage({Key? key}) : super(key: key);
 
@@ -16,15 +18,15 @@ class _SecondPageState extends State<SecondPage> {
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
-            shape: ContinuousRectangleBorder(
+            shape:const ContinuousRectangleBorder(
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(50),
                     bottomRight: Radius.circular(50))),
             backgroundColor: Colors.white,
-            expandedHeight: MediaQuery.of(context).size.height * 0.3,
+            expandedHeight: MediaQuery.of(context).size.height * 0.61,
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
-                decoration: BoxDecoration(
+                decoration:const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(50),
@@ -57,7 +59,7 @@ class _SecondPageState extends State<SecondPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
-                            children: [
+                            children: const[
                               Text(
                                 "Oct, ",
                                 style: TextStyle(
@@ -73,6 +75,7 @@ class _SecondPageState extends State<SecondPage> {
                           addTaskButton()
                         ],
                       ),
+                   const   Expanded(child: MyDay()),
                     ],
                   ),
                 ),
