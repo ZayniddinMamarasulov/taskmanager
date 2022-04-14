@@ -96,16 +96,19 @@ class _ThirdPageState extends State<ThirdPage> {
                       Time(context),
                       divider(context),
                       const SizedBox(height: 26,),
-                      const Text("Description",style: TextStyle(color: Color(0xffBFC8E8),fontSize: 20),),
+                      TextFormField(
+                        style: const TextStyle(color: Colors.black,fontSize: 30),
+                        decoration: const InputDecoration(
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xffBFC8E8)),
+                          ),
+                          labelText: "Description",
+                          fillColor: Colors.white,
+                          labelStyle: TextStyle(color: Color(0xffBFC8E8),fontSize: 20,letterSpacing: 3),
+                        ),
+                      ),
                       const SizedBox(height: 20,),
-                      const  Text("Lorem ipsum dolor sit amet, "
-                          "er adipiscing elit, sed dianummy "
-                          "nibh euismod dolor sit amet, er adipiscing elit, "
-                          "sed dianummy nibh euismod.",style:TextStyle(
-                          color: Color(0xff2E3A59),fontSize: 20,height: 1.2
-                      ),),
-                      const SizedBox(height: 20,),
-                      divider(context),
+                      //divider(context),
                       const  SizedBox(height: 26,),
                       const Text("Category",style: TextStyle(color: Color(0xffBFC8E8),fontSize: 20),),
                       const SizedBox(height: 20,),
@@ -153,11 +156,19 @@ class _ThirdPageState extends State<ThirdPage> {
         Row(
           children: [
             const SizedBox(width: 20,),
-            Text("${time.hour}:${(time.minute<10)?'0${time.minute}':'${time.minute}'}",
-              style: const TextStyle(fontSize: 28,color: Color(0xff2E3A59)),),
+            InkWell(
+              onTap: (){ selectTime(context);
+              print(time);},
+              child: Text("${time.hour}:${(time.minute<10)?'0${time.minute}':'${time.minute}'}",
+                style: const TextStyle(fontSize: 28,color: Color(0xff2E3A59)),),
+            ),
             const SizedBox(width: 70,),
-            Text("${time2.hour}:${(time2.minute<10)?'0${time2.minute}':'${time2.minute}'} ",
-              style: const TextStyle(fontSize: 28,color: Color(0xff2E3A59)),)
+            InkWell(
+              onTap: (){ selectTime2(context);
+              print(time2);},
+              child: Text("${time2.hour}:${(time2.minute<10)?'0${time2.minute}':'${time2.minute}'} ",
+                style: const TextStyle(fontSize: 28,color: Color(0xff2E3A59)),),
+            )
           ],
         ),
         const SizedBox(height: 20,),
