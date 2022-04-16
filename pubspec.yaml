@@ -33,6 +33,10 @@ dependencies:
   intl:
   smooth_page_indicator: ^1.0.0+2
   persistent_bottom_nav_bar:
+  sqflite: ^2.0.2
+  flutter_bloc:
+  equatable:
+  path:
 
 
   # The following adds the Cupertino Icons font to your application.

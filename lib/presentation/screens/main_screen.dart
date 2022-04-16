@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import '../../logic/task_bloc.dart';
 import 'second_page.dart';
 import 'my_home_page.dart';
 
@@ -42,6 +44,7 @@ class _MainScreenState extends State<MainScreen> {
               width: 24,
             ),
             label: "",
+
           ),
           BottomNavigationBarItem(
               activeIcon: SvgPicture.asset(
@@ -82,6 +85,7 @@ class _MainScreenState extends State<MainScreen> {
         ],
         currentIndex: selectedIndex,
         onTap: (int i) {
+
           setState(() {
             selectedIndex = i;
           });
