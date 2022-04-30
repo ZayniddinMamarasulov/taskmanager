@@ -2,8 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
-import '../widgets/progress_task.dart';
+import 'package:taskmanager/presentation/widgets/task_item.dart';
 import '../widgets/task_card.dart';
 import '../widgets/task_status.dart';
 
@@ -123,20 +122,19 @@ class _MyHomePageScreenState extends State<MyHomePageScreen> {
               ),
             ),
           ),
-          const SizedBox(
-            height: 15,
-          ),
-          Container(
-            margin: EdgeInsets.only(right: 15),
-            child: PorogressTask(taskTitle: "Design Changes", days: "2 "),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Container(
-            margin: EdgeInsets.only(right: 15),
-            child: PorogressTask(taskTitle: "Design Changes", days: "2 "),
-          ),
+
+         Align(
+           alignment: Alignment.centerLeft,
+           child: Text('Progress',style: TextStyle(fontFamily: 'PoppinsBold',fontSize: 18),),
+         ),
+         SizedBox(
+           height: MediaQuery.of(context).size.height*.22,
+           child:ListView.builder(
+             padding: EdgeInsets.only(bottom: 10),
+             itemBuilder: (context,index){
+             return TaskItem();
+           },itemCount: 4,)
+         )
         ]),
       ),
     );
