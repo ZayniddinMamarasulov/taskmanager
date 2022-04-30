@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:taskmanager/models/task.dart';
+import 'package:taskmanager/presentation/screens/create_task_screen.dart';
+
+import '../../main_provider.dart';
 
 class TaskItem extends StatelessWidget {
-  const TaskItem({Key? key}) : super(key: key);
+  final Task task;
+
+  const TaskItem(this.task, {Key? key}) : super(key: key);
+
+  void updateTaskList(context) async {
+    final mainProvider = Provider.of<MainProvider>(context, listen: false);
+    mainProvider.updateTaskList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,16 +28,17 @@ class TaskItem extends StatelessWidget {
               color: Colors.white, borderRadius: BorderRadius.circular(18)),
           child: ListTile(
             title: Text(
-              'Design Changes ',
+              task.title ?? "...",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            subtitle: Text('2 Days ago'),
+            subtitle: Text(task.startTime ?? "..."),
             trailing: PopupMenuButton(
               itemBuilder: (context) {
                 return [
                   PopupMenuItem(
                     value: 'edit',
                     child: Text('Edit'),
+                    onTap: () {},
                   ),
                   PopupMenuItem(
                     value: 'delete',
@@ -34,7 +47,13 @@ class TaskItem extends StatelessWidget {
                 ];
               },
               onSelected: (String value) {
-                print('You Click on po up menu item');
+                if (value == 'edit') {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(
+                        builder: (context) => CreateTaskPage(currentTask: task),
+                      ))
+                      .then((value) => updateTaskList(context));
+                }
               },
             ),
             leading: Container(

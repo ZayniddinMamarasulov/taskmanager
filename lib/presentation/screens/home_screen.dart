@@ -1,8 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:taskmanager/database_helper.dart';
+import 'package:taskmanager/main_provider.dart';
 import 'package:taskmanager/presentation/widgets/task_item.dart';
+import '../../models/task.dart';
 import '../widgets/task_card.dart';
 import '../widgets/task_status.dart';
 
@@ -49,7 +54,7 @@ class _MyHomePageScreenState extends State<MyHomePageScreen> {
               ],
             ),
             SizedBox(
-              height: height * .08,
+              height: height * .05,
             ),
             Align(
               alignment: Alignment.centerLeft,
@@ -117,15 +122,7 @@ class _MyHomePageScreenState extends State<MyHomePageScreen> {
                 style: TextStyle(fontFamily: 'PoppinsBold', fontSize: 18),
               ),
             ),
-            SizedBox(
-                height: MediaQuery.of(context).size.height * .22,
-                child: ListView.builder(
-                  padding: EdgeInsets.only(bottom: 10),
-                  itemBuilder: (context, index) {
-                    return TaskItem();
-                  },
-                  itemCount: 4,
-                ))
+            tasksList()
           ]),
         ),
       ),
@@ -139,7 +136,7 @@ class _MyHomePageScreenState extends State<MyHomePageScreen> {
   ) {
     return SizedBox(
         width: width,
-        height: height * .3,
+        height: height * .25,
         child: PageView.builder(
             itemCount: 3,
             controller: controller,
@@ -151,5 +148,24 @@ class _MyHomePageScreenState extends State<MyHomePageScreen> {
                       TaskName: "Front end Development",
                       deadline: DateTime.now()));
             }));
+  }
+
+  Widget tasksList() {
+    return SizedBox(
+        height: MediaQuery.of(context).size.height * .3,
+        child: Consumer<MainProvider>(builder: (context, data, child) {
+          return FutureBuilder(
+              future: DatabaseHelper.intance.getTasks(),
+              builder:
+                  (BuildContext context, AsyncSnapshot<List<Task>> snapshot) {
+                return ListView.builder(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  itemBuilder: (context, index) {
+                    return TaskItem(snapshot.data![index]);
+                  },
+                  itemCount: snapshot.data?.length ?? 0,
+                );
+              });
+        }));
   }
 }

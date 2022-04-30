@@ -25,6 +25,9 @@ class DatabaseHelper {
     return _db ?? await _initDB();
   }
 
+  // salom.mp3
+  // todo.db
+
   Future<Database?> _initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = documentsDirectory.path + "todo.db";
@@ -61,5 +64,11 @@ class DatabaseHelper {
       tasks.add(Task.fromMap(element));
     });
     return tasks;
+  }
+
+  Future<int?> update(Task task) async {
+    final data = await db;
+    return await data?.update(tableName, task.toMap(),
+        where: '$colId = ?', whereArgs: [task.id]);
   }
 }

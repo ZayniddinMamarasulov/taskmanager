@@ -3,30 +3,41 @@ import 'package:taskmanager/app_colors.dart';
 import 'package:taskmanager/database_helper.dart';
 import 'package:taskmanager/models/tasks.dart';
 
-import 'models/task.dart';
+import '../../models/task.dart';
 
-class ThirdPage extends StatefulWidget {
-  const ThirdPage({Key? key}) : super(key: key);
+class CreateTaskPage extends StatefulWidget {
+  Task? currentTask;
+
+  CreateTaskPage({this.currentTask, Key? key}) : super(key: key);
 
   @override
-  State<ThirdPage> createState() => _ThirdPageState();
+  State<CreateTaskPage> createState() => _CreateTaskPageState();
 }
 
-class _ThirdPageState extends State<ThirdPage> {
+class _CreateTaskPageState extends State<CreateTaskPage> {
   @override
   late TimeOfDay time;
   late TimeOfDay time2;
   late TimeOfDay picket;
   late TimeOfDay picket2;
 
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _dateController = TextEditingController();
+
+  @override
   void initState() {
     super.initState();
     time = TimeOfDay.now();
     time2 = TimeOfDay.now();
+
+    if (widget.currentTask != null) {
+      _nameController.text = widget.currentTask?.title ?? "...";
+      _dateController.text = widget.currentTask?.startTime ?? "...";
+    }
   }
 
   //select time
-  Future<Null> selectTime(BuildContext context) async {
+  Future<void> selectTime(BuildContext context) async {
     picket = (await showTimePicker(context: context, initialTime: time))!;
     if (picket != null) {
       setState(() {
@@ -35,7 +46,7 @@ class _ThirdPageState extends State<ThirdPage> {
     }
   }
 
-  Future<Null> selectTime2(BuildContext context) async {
+  Future<void> selectTime2(BuildContext context) async {
     picket2 = (await showTimePicker(context: context, initialTime: time2))!;
     if (picket2 != null) {
       setState(() {
@@ -83,8 +94,10 @@ class _ThirdPageState extends State<ThirdPage> {
                         const SizedBox(
                           width: 64,
                         ),
-                        const Text(
-                          'Create a Task',
+                        Text(
+                          widget.currentTask == null
+                              ? 'Create a Task'
+                              : 'Update a task',
                           style: TextStyle(color: Colors.white, fontSize: 20),
                         ),
                         const SizedBox(
@@ -97,7 +110,7 @@ class _ThirdPageState extends State<ThirdPage> {
                         )
                       ],
                     ),
-                    Form()
+                    form()
                   ],
                 ),
               ),
@@ -147,11 +160,11 @@ class _ThirdPageState extends State<ThirdPage> {
                     const SizedBox(
                       height: 20,
                     ),
-                    Categories(context),
+                    categories(context),
                     const SizedBox(
                       height: 30,
                     ),
-                    CreateButton(),
+                    createButton(),
                     SizedBox(
                       height: 40,
                     )
@@ -230,7 +243,7 @@ class _ThirdPageState extends State<ThirdPage> {
     );
   }
 
-  Widget Categories(BuildContext context) {
+  Widget categories(BuildContext context) {
     return Wrap(
         spacing: 10,
         runSpacing: 8,
@@ -254,7 +267,7 @@ class _ThirdPageState extends State<ThirdPage> {
         }));
   }
 
-  Widget CreateButton() {
+  Widget createButton() {
     return Container(
         decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -265,22 +278,18 @@ class _ThirdPageState extends State<ThirdPage> {
             borderRadius: BorderRadius.all(Radius.circular(40))),
         child: TextButton(
           onPressed: () {
-            createTask();
+            widget.currentTask == null ? createTask() : updateTask();
           },
-          child: const Center(
+          child: Center(
             child: Text(
-              'Create task',
+              widget.currentTask == null ? 'Create task' : 'Update task',
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
           ),
         ));
   }
 
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _dateController = TextEditingController();
-  TextEditingController _descController = TextEditingController();
-
-  Widget Form() {
+  Widget form() {
     return Column(
       children: [
         TextFormField(
@@ -325,12 +334,25 @@ class _ThirdPageState extends State<ThirdPage> {
 
     Navigator.pop(context);
   }
-}
 
+  void updateTask() async {
+    Task currentTask = Task.withId(
+      widget.currentTask?.id,
+      _nameController.text,
+      "description1",
+      DateTime.now(),
+      _dateController.text,
+      "19:00",
+    );
+
+    var res = await DatabaseHelper.intance.update(currentTask);
+    print("Updated task : $res");
+    Navigator.pop(context);
+  }
+}
 
 // CRUD
 // C - Create (yaratish) +
 // R - Read (O'qish) +
 // U - update (yangilash)
 // D - Delete (o'chirish)
-

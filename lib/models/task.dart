@@ -8,6 +8,9 @@ class Task {
 
   Task(this.title, this.description, this.time, this.startTime, this.endTime);
 
+  Task.withId(this.id, this.title, this.description, this.time, this.startTime,
+      this.endTime);
+
   Map<String, Object?> toMap() {
     var map = <String, Object?>{
       "title": title,

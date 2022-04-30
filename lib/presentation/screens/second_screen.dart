@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:taskmanager/database_helper.dart';
+import 'package:taskmanager/presentation/widgets/task_item.dart';
 
+import '../../main_provider.dart';
 import '../../models/task.dart';
-import '../../thirdpage.dart';
+import 'create_task_screen.dart';
 
 class SecondPage extends StatefulWidget {
   const SecondPage({Key? key}) : super(key: key);
@@ -106,21 +109,7 @@ class _SecondPageState extends State<SecondPage> {
                               fontWeight: FontWeight.w600,
                               color: Color(0xFF2E3A59)),
                         ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.8,
-                          child: FutureBuilder(
-                            future: DatabaseHelper.intance.getTasks(),
-                            builder: (BuildContext context,
-                                AsyncSnapshot<List<Task>> snapshot) {
-                              return ListView.builder(
-                                  itemCount: snapshot.data?.length ?? 0,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return taskItem(snapshot.data![index]);
-                                  });
-                            },
-                          ),
-                        ),
+                        tasksList()
                       ],
                     ));
               },
@@ -136,7 +125,7 @@ class _SecondPageState extends State<SecondPage> {
     return InkWell(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => ThirdPage(),
+          builder: (context) => CreateTaskPage(),
         ));
       },
       child: Container(
@@ -164,53 +153,22 @@ class _SecondPageState extends State<SecondPage> {
     );
   }
 
-  Widget taskItem(Task task) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 12,
-        ),
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          decoration: BoxDecoration(
-              color: Colors.white, borderRadius: BorderRadius.circular(18)),
-          child: ListTile(
-            title: Text(
-              task.title!,
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            subtitle: Text('2 Days ago'),
-            trailing: IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.more_vert,
-              ),
-            ),
-            leading: Container(
-              height: 61.0,
-              width: 61.0,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  gradient: LinearGradient(
-                    begin: Alignment.topRight,
-                    end: Alignment.bottomLeft,
-                    colors: [
-                      Color(0xFF9C2CF3),
-                      Color(0xFF3A49F9),
-                    ],
-                  )),
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                child: Image.asset(
-                  'assets/images/list_icon.png',
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
+  Widget tasksList() {
+    return SizedBox(
+        height: MediaQuery.of(context).size.height * 0.8,
+        child: Consumer<MainProvider>(builder: (context, data, child) {
+          return FutureBuilder(
+              future: DatabaseHelper.intance.getTasks(),
+              builder:
+                  (BuildContext context, AsyncSnapshot<List<Task>> snapshot) {
+                return ListView.builder(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  itemBuilder: (context, index) {
+                    return TaskItem(snapshot.data![index]);
+                  },
+                  itemCount: snapshot.data?.length ?? 0,
+                );
+              });
+        }));
   }
 }
