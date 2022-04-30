@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:taskmanager/database_helper.dart';
 
+import '../../models/task.dart';
 import '../../thirdpage.dart';
 
 class SecondPage extends StatefulWidget {
@@ -10,7 +12,6 @@ class SecondPage extends StatefulWidget {
 }
 
 class _SecondPageState extends State<SecondPage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -107,11 +108,18 @@ class _SecondPageState extends State<SecondPage> {
                         ),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.8,
-                          child: ListView.builder(
-                              itemCount: 50,
-                              itemBuilder: (BuildContext context, int index) {
-                                return taskItem();
-                              }),
+                          child: FutureBuilder(
+                            future: DatabaseHelper.intance.getTasks(),
+                            builder: (BuildContext context,
+                                AsyncSnapshot<List<Task>> snapshot) {
+                              return ListView.builder(
+                                  itemCount: snapshot.data?.length ?? 0,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return taskItem(snapshot.data![index]);
+                                  });
+                            },
+                          ),
                         ),
                       ],
                     ));
@@ -156,7 +164,7 @@ class _SecondPageState extends State<SecondPage> {
     );
   }
 
-  Widget taskItem() {
+  Widget taskItem(Task task) {
     return Column(
       children: [
         SizedBox(
@@ -168,7 +176,7 @@ class _SecondPageState extends State<SecondPage> {
               color: Colors.white, borderRadius: BorderRadius.circular(18)),
           child: ListTile(
             title: Text(
-              'Design Changes ',
+              task.title!,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             subtitle: Text('2 Days ago'),
