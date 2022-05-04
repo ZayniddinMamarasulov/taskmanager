@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -70,5 +69,11 @@ class DatabaseHelper {
     final data = await db;
     return await data?.update(tableName, task.toMap(),
         where: '$colId = ?', whereArgs: [task.id]);
+  }
+  Future<int?> delete(int taskID) async{
+    final data = await db;
+    return await data?.delete(
+      tableName, where: "$colId = ?", whereArgs: [taskID]);
+
   }
 }

@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:taskmanager/database_helper.dart';
 import 'package:taskmanager/main_provider.dart';
 import 'package:taskmanager/presentation/widgets/task_item.dart';
@@ -27,10 +25,10 @@ class _MyHomePageScreenState extends State<MyHomePageScreen> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.only(left: 20, right: 0),
+          padding:const EdgeInsets.only(left: 20, right: 0),
           color: Colors.grey.shade200,
           child: Column(children: <Widget>[
-            SizedBox(
+           const SizedBox(
               height: 35,
             ),
             Row(
@@ -56,10 +54,10 @@ class _MyHomePageScreenState extends State<MyHomePageScreen> {
             SizedBox(
               height: height * .05,
             ),
-            Align(
+          const  Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                "Hello Rohan!",
+                "Hello Dear!",
                 style: TextStyle(
                     fontFamily: 'PoppinsBold',
                     fontSize: 40,
@@ -67,7 +65,7 @@ class _MyHomePageScreenState extends State<MyHomePageScreen> {
                     height: 0.8),
               ),
             ),
-            SizedBox(
+         const   SizedBox(
               height: 6,
             ),
             Align(
@@ -77,11 +75,11 @@ class _MyHomePageScreenState extends State<MyHomePageScreen> {
                 style: TextStyle(
                     fontFamily: 'Poppins',
                     fontSize: 24,
-                    color: Color(0xFF2E3A59).withOpacity(.4),
+                    color:const Color(0xFF2E3A59).withOpacity(.4),
                     height: 0.8),
               ),
             ),
-            SizedBox(
+          const  SizedBox(
               height: 25,
             ),
             Row(
@@ -90,7 +88,7 @@ class _MyHomePageScreenState extends State<MyHomePageScreen> {
                 TaskStatus(task: "My Tasks", taskStatus: true),
                 TaskStatus(task: "In-progress", taskStatus: false),
                 Container(
-                    margin: EdgeInsets.only(right: 15),
+                    margin:const EdgeInsets.only(right: 15),
                     child: TaskStatus(task: "Completed", taskStatus: false)),
               ],
             ),
@@ -115,7 +113,7 @@ class _MyHomePageScreenState extends State<MyHomePageScreen> {
                 ),
               ),
             ),
-            Align(
+           const Align(
               alignment: Alignment.centerLeft,
               child: Text(
                 'Progress',

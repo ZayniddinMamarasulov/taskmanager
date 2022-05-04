@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:taskmanager/database_helper.dart';
 import 'package:taskmanager/models/task.dart';
 import 'package:taskmanager/presentation/screens/create_task_screen.dart';
 
@@ -15,21 +16,25 @@ class TaskItem extends StatelessWidget {
     mainProvider.updateTaskList();
   }
 
+  void deletaeTask(context)async{
+   await DatabaseHelper.intance.delete(task.id!);
+   updateTaskList(context);
+  }
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
+      const  SizedBox(
           height: 12,
         ),
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          padding:const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           decoration: BoxDecoration(
               color: Colors.white, borderRadius: BorderRadius.circular(18)),
           child: ListTile(
             title: Text(
               task.title ?? "...",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style:const TextStyle(fontWeight: FontWeight.bold),
             ),
             subtitle: Text(task.startTime ?? "..."),
             trailing: PopupMenuButton(
@@ -37,10 +42,10 @@ class TaskItem extends StatelessWidget {
                 return [
                   PopupMenuItem(
                     value: 'edit',
-                    child: Text('Edit'),
+                    child:const Text('Edit'),
                     onTap: () {},
                   ),
-                  PopupMenuItem(
+                 const PopupMenuItem(
                     value: 'delete',
                     child: Text('Delete'),
                   )
@@ -54,6 +59,9 @@ class TaskItem extends StatelessWidget {
                       ))
                       .then((value) => updateTaskList(context));
                 }
+                else if(value == "delete"){
+                  deletaeTask(context);
+                }
               },
             ),
             leading: Container(
@@ -61,7 +69,7 @@ class TaskItem extends StatelessWidget {
               width: 61.0,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
-                  gradient: LinearGradient(
+                  gradient:const LinearGradient(
                     begin: Alignment.topRight,
                     end: Alignment.bottomLeft,
                     colors: [

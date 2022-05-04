@@ -13,79 +13,82 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int selectedIndex = 0;
   List<Widget> screen = [
-    MyHomePageScreen(),
-    SecondPage(),
+   const MyHomePageScreen(),
+   const SecondPage(),
     Container(),
     Container()
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: screen.elementAt(selectedIndex),
-      bottomNavigationBar: BottomNavigationBar(
-        showUnselectedLabels: false,
-        showSelectedLabels: false,
-        backgroundColor: Colors.grey.shade200,
-        type: BottomNavigationBarType.fixed,
-        elevation: 0,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            activeIcon: SvgPicture.asset(
-              'assets/icons/home1.svg',
-              color: Colors.deepPurple,
-              width: 28,
-            ),
-            icon: SvgPicture.asset(
-              'assets/icons/home.svg',
-              color: Colors.grey.shade500,
-              width: 24,
-            ),
-            label: "",
-          ),
-          BottomNavigationBarItem(
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        body: screen.elementAt(selectedIndex),
+        bottomNavigationBar: BottomNavigationBar(
+          showUnselectedLabels: false,
+          showSelectedLabels: false,
+          backgroundColor: Colors.grey.shade200,
+          type: BottomNavigationBarType.fixed,
+          elevation: 0,
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
               activeIcon: SvgPicture.asset(
-                'assets/icons/cal.svg',
+                'assets/icons/home1.svg',
                 color: Colors.deepPurple,
                 width: 28,
               ),
               icon: SvgPicture.asset(
-                'assets/icons/cal.svg',
+                'assets/icons/home.svg',
                 color: Colors.grey.shade500,
                 width: 24,
               ),
-              label: ''),
-          BottomNavigationBarItem(
-              activeIcon: SvgPicture.asset(
-                'assets/icons/notification.svg',
-                color: Colors.deepPurple,
-                width: 28,
-              ),
-              icon: SvgPicture.asset(
-                'assets/icons/notification.svg',
-                color: Colors.grey,
-                width: 24,
-              ),
-              label: ''),
-          BottomNavigationBarItem(
-              activeIcon: SvgPicture.asset(
-                'assets/icons/search.svg',
-                color: Colors.deepPurple,
-                width: 35,
-              ),
-              icon: SvgPicture.asset(
-                'assets/icons/search.svg',
-                color: Colors.grey,
-                width: 33,
-              ),
-              label: ''),
-        ],
-        currentIndex: selectedIndex,
-        onTap: (int i) {
-          setState(() {
-            selectedIndex = i;
-          });
-        },
+              label: "",
+            ),
+            BottomNavigationBarItem(
+                activeIcon: SvgPicture.asset(
+                  'assets/icons/cal.svg',
+                  color: Colors.deepPurple,
+                  width: 28,
+                ),
+                icon: SvgPicture.asset(
+                  'assets/icons/cal.svg',
+                  color: Colors.grey.shade500,
+                  width: 24,
+                ),
+                label: ''),
+            BottomNavigationBarItem(
+                activeIcon: SvgPicture.asset(
+                  'assets/icons/notification.svg',
+                  color: Colors.deepPurple,
+                  width: 28,
+                ),
+                icon: SvgPicture.asset(
+                  'assets/icons/notification.svg',
+                  color: Colors.grey,
+                  width: 24,
+                ),
+                label: ''),
+            BottomNavigationBarItem(
+                activeIcon: SvgPicture.asset(
+                  'assets/icons/search.svg',
+                  color: Colors.deepPurple,
+                  width: 35,
+                ),
+                icon: SvgPicture.asset(
+                  'assets/icons/search.svg',
+                  color: Colors.grey,
+                  width: 33,
+                ),
+                label: ''),
+          ],
+          currentIndex: selectedIndex,
+          onTap: (int i) {
+            setState(() {
+              selectedIndex = i;
+            });
+          },
+        ),
       ),
     );
   }
